@@ -44,6 +44,10 @@ const Flashcard = () => {
     const randNum = Math.floor(Math.random() * 11);
     const [randomNumber, setRandomNumber] = useState(randNum);
 
+    const getRandomNumber = () => {
+        const randNum = Math.floor(Math.random() * 11);
+        setRandomNumber(randNum);
+    }
     const getQuestion = () => {
         const randomElement = flashcards[randomNumber];
         const randomQuestion = Object.keys(randomElement)[0];
@@ -58,15 +62,32 @@ const Flashcard = () => {
         // Use the setter to switch the card to the opposite state. Ternary operator used in the return statement when rendering that does the change of the actual flashcard
         setIsFront(!isFront);
     }
+    const nextCard = () => {
+        // call the random number generator
+        getRandomNumber();
+
+        // switch the state of the card to the front
+        setIsFront(true);
+    }
 
 
     return (
-        <div className='Flashcard' onClick={flipCard}>
-            {isFront ? (
-                <h4 className='Question'>{getQuestion()}</h4>
-            ) : (
-                <h4 className='Answer'>{getAnswer()}</h4>
-            )}
+        <div className='Container'>
+            <div className='Flashcard' onClick={flipCard}>
+                {isFront ? (
+                    <h4 className='Question'>{getQuestion()}</h4>
+                ) : (
+                    <h4 className='Answer'>{getAnswer()}</h4>
+                )}
+            </div>
+
+            <div className='Buttons'>
+                <button onClick={nextCard}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     )
 }
