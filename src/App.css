@@ -7,9 +7,6 @@ body, html {
   background-color: #121212;
   color: #eee;
 }
-.Container {
-  outline: 2px solid green;
-}
 .App {
   outline: 2px solid pink;
   display: flex;
@@ -18,7 +15,6 @@ body, html {
   place-items: center;
 }
 .Flashcard {
-  outline: 2px solid blue;
   padding: 10rem 0rem;
   background-image: url("https://imgs.search.brave.com/Z1Fwhuvb9p0ZEy6M8wOsXAG-0OiaRCWo68mtgPmzK8I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90cml2/aWFibGlzcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjIv/MDgvcGV4ZWxzLWZl/bGl4LW1pdHRlcm1l/aWVyLTk1Njk4MS0x/MDI0eDU3Ni5qcGc");
   background-position: center;
@@ -27,8 +23,17 @@ body, html {
   text-wrap: wrap;
   width: 800px;
   margin: auto;
-  
 }
 .Count {
   margin-bottom: 15rem;
+}
+.nextCard {
+  padding: 1rem 2rem;
+  margin: 1rem;
+  background-color: aqua;
+  border-radius: 10%;
+}
+.nextCard:hover {
+  background-color: bisque;
+  border-color: aqua;
 }
