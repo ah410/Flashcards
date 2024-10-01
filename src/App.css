@@ -1,42 +1,34 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body, html {
+  height: 100%;
+  display: flex;
+  place-items: center;
   text-align: center;
+  justify-content: center;
+  background-color: #121212;
+  color: #eee;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.Container {
+  outline: 2px solid green;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.App {
+  outline: 2px solid pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.Flashcard {
+  outline: 2px solid blue;
+  padding: 10rem 0rem;
+  background-image: url("https://imgs.search.brave.com/Z1Fwhuvb9p0ZEy6M8wOsXAG-0OiaRCWo68mtgPmzK8I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90cml2/aWFibGlzcy5jb20v/d3AtY29udGVudC91/cGxvYWRzLzIwMjIv/MDgvcGV4ZWxzLWZl/bGl4LW1pdHRlcm1l/aWVyLTk1Njk4MS0x/MDI0eDU3Ni5qcGc");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-wrap: wrap;
+  width: 800px;
+  margin: auto;
+  
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.Count {
+  margin-bottom: 15rem;
 }
