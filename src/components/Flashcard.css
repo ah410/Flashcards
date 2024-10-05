@@ -1,0 +1,27 @@
+.Flashcard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lemonchiffon;
+    width: 50vw;         
+    height: 30vh;         
+    max-width: 700px;     
+    max-height: 300px;
+    margin: auto;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px 2px #0000004d;
+  }
+  .Flashcard:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px 4px #0000004d; /* Double the box shadow for an enhanced interactive effect */
+  }
+  .nextCard {
+    padding: 1rem 2rem;
+    margin: 1rem;
+    background-color: #333333;
+    border-radius: 10%;
+    cursor: pointer;
+  }
+  .nextCard:hover {
+    outline: 2px solid lemonchiffon;
+  }
