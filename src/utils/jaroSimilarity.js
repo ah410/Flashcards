@@ -2,7 +2,7 @@ import { max } from './max';
 
 export function jaroSimilarity(s1, s2) {
     // calculate matching window
-    var matchingWindow = (max(s1.length,s2.length)/2) - 1;
+    var matchingWindow = Math.floor((max(s1.length,s2.length)/2) - 1);
 
     // error testing
     console.log("matching window: " + matchingWindow);
@@ -14,19 +14,20 @@ export function jaroSimilarity(s1, s2) {
     var s1MatchedArray = [];
     var s2MatchedArray = [];
 
-    // loop over the correct answer
+    // loop over the correct answer (s1)
     for (let i = 0; i < s1.length; i++) {
         var j = i - matchingWindow;
         var upperIndex = i + matchingWindow;
+
+        // Bounds checking for looping over the input
         if (j < 0) {
             j = 0;
-        } else if (i + matchingWindow > s2.length) {
+        } else if (upperIndex >= s2.length) {
             upperIndex = s2.length - 1;
         }
+
         for (j; j <= upperIndex; j++) {
-            if (j < 0 || j > s2.length) {
-                continue;
-            } else if (s1[i] == s2[j]) {
+            if (s1[i] == s2[j]) {
                 matchingCharacters += 1;
                 // add the characters to their respective arrays in the order in which they came
                 s1MatchedArray.splice(i, 0, s1[i]);
