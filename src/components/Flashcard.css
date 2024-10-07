@@ -1,27 +1,54 @@
 .Flashcard {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: lemonchiffon;
-    width: 50vw;         
-    height: 30vh;         
-    max-width: 700px;     
-    max-height: 300px;
-    margin: auto;
-    box-sizing: border-box;
-    box-shadow: 0 0 5px 2px #0000004d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lemonchiffon;
+  width: 50vw;         
+  height: 30vh;         
+  max-width: 700px;     
+  max-height: 300px;
+  margin: auto;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px 2px #0000004d;
   }
-  .Flashcard:hover {
-    cursor: pointer;
-    box-shadow: 0 0 10px 4px #0000004d; /* Double the box shadow for an enhanced interactive effect */
-  }
-  .nextCard {
-    padding: 1rem 2rem;
-    margin: 1rem;
-    background-color: #333333;
-    border-radius: 10%;
-    cursor: pointer;
-  }
-  .nextCard:hover {
-    outline: 2px solid lemonchiffon;
-  }
+.Flashcard:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px 4px #0000004d; /* Double the box shadow for an enhanced interactive effect */
+}
+.button-nextCard {
+  padding: 1rem 2rem;
+  margin: 1rem;
+  background-color: #333333;
+  border-radius: 10%;
+  cursor: pointer;
+}
+.button-nextCard:hover {
+  outline: 2px solid lemonchiffon;
+}
+
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form * {
+  padding: 0.5rem 0.5rem;
+
+}
+#correct {
+  background-color: green;
+}
+#incorrect {
+  background-color:red;
+}
+.button-guess {
+  background-color: #333333;
+  color: #F5F5F5;
+  border-radius: 5%;
+  cursor: pointer;
+}
+input {
+  margin-right: 7px;
+  border-radius: 5%;
+}

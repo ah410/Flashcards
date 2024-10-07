@@ -1,5 +1,6 @@
 import './Flashcard.css';
 import { useState } from 'react'; 
+import { jaroSimilarity } from '../utils/jaroSimilarity';
 
 
 const Flashcard = () => {
@@ -35,15 +36,28 @@ const Flashcard = () => {
             "What is the quadratic formula?":"A formula used to find the roots of a quadratic equation: (-b ± √(b²-4ac)) / 2a."
         }
     ];
-    
 
-    // State whether the card is the front or back
+    // get a random number between 0-9
+    const randNum = Math.floor(Math.random() * 10);
+
+    // State variables
     const [isFront, setIsFront] = useState(true);
-
-    // For grabbing an element in the array
-    const randNum = Math.floor(Math.random() * 11);
+    const [isCorrect, setIsCorrect] = useState('');
+    const [inputValue, setInputValue] = useState('');
     const [randomNumber, setRandomNumber] = useState(randNum);
 
+    // Form functions
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        var similarity = jaroSimilarity(getAnswer(), inputValue);
+        setIsCorrect(similarity >= 0.7 ? 'correct' : 'incorrect');
+        console.log("similarity: " + similarity);
+    }
+
+    // Getter functions 
     const getRandomNumber = () => {
         const randNum = Math.floor(Math.random() * 11);
         setRandomNumber(randNum);
@@ -58,15 +72,14 @@ const Flashcard = () => {
         const randomAnswer = Object.values(randomElement)[0];
         return randomAnswer;
     }
+
+    // OnClick Functions
     const flipCard = () => {
-        // Use the setter to switch the card to the opposite state. Ternary operator used in the return statement when rendering that does the change of the actual flashcard
         setIsFront(!isFront);
     }
     const nextCard = () => {
-        // call the random number generator
+        // call the random number generator and switch the state of the card to the front
         getRandomNumber();
-
-        // switch the state of the card to the front
         setIsFront(true);
     }
 
@@ -81,11 +94,25 @@ const Flashcard = () => {
                 )}
             </div>
 
-            <button onClick={nextCard} className='nextCard'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F5F5F5" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <button onClick={nextCard} className='button-nextCard'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F5F5F5" className="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
                 </svg>
             </button>
+
+            <div className='answer-container'>
+                <form onSubmit={handleSubmit}>
+                    <h4 className='guess-answer'>Guess your answer here:</h4>
+                    <input 
+                        type="text"
+                        value={inputValue}
+                        id={isCorrect}
+                        onChange={handleInputChange}
+                        placeholder='Type guess here...'
+                    />
+                    <button type='submit' className='button-guess'>Submit Guess</button>
+                </form>
+            </div>
         </div>
     )
 }
