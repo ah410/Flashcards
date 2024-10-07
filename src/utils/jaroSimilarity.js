@@ -50,7 +50,7 @@ export function jaroSimilarity(s1, s2) {
         transpositions = Math.ceil(numberIndexesToBeChanged / 2);
     }
 
-    // Calculate jaro similarity: J = 1/3 * ( m/s1 + m/s2 + (m-t)/m )
+    // Calculate jaro similarity: J = 1/3 * ( m/|s1| + m/|s2| + (m-t)/m )
     var sim = 0;
     if (matchingCharacters != 0) {
         sim = 1/3 * ( (matchingCharacters/s1.length) + (matchingCharacters/s2.length) + ((matchingCharacters - transpositions)/matchingCharacters) );
