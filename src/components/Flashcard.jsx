@@ -1,5 +1,5 @@
 import './Flashcard.css';
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import { jaroSimilarity } from '../utils/jaroSimilarity';
 
 
@@ -37,14 +37,43 @@ const Flashcard = () => {
         }
     ];
 
-    // get a random number between 0-9
-    const randNum = Math.floor(Math.random() * 10);
+    // Go back and forth between cards in a unique card set: 5 steps
+
+    // Step 1: create 3 state variables to keep track of the indices and array generation
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [randomIndexArray, setRandomIndexArray] = useState([]);
+    const [isInitialized, setIsInitialized] = useState(false);
+
+    // Step 2: make a function, generateRandomIndexArra(), that creates an array of random unique indices from 0-9 of length 10
+    const generateRandomIndexArray = () => {
+        var validNumbers = [0,1,2,3,4,5,6,7,8,9];
+        var updatedArray = [];
+
+        for (let i = 0; i < 10; i++) {
+            // Grab random index from 0 - validNumbers.length. Push the element at that index to the updatedArrray. Remove the element at that randIndex so it can't be used again, ensuring uniqueness
+            var randIndex = Math.floor(Math.random() * validNumbers.length);
+            updatedArray.push(validNumbers[randIndex]); 
+            validNumbers.splice(randIndex, 1);
+
+            // Debugging
+            console.log("randindex: " + randIndex);
+            console.log("updated array: " + updatedArray);
+            console.log("validNumbers: " + validNumbers);
+        }
+        setRandomIndexArray(updatedArray);  
+        console.log("RandomIndexArray: " + randomIndexArray);
+    }
+
+    // Step 3: useEffect to generate the random array on the first render
+    useEffect(() => {
+        generateRandomIndexArray();
+        setIsInitialized(true);
+    }, []);
 
     // State variables
     const [isFront, setIsFront] = useState(true);
     const [isCorrect, setIsCorrect] = useState('');
     const [inputValue, setInputValue] = useState('');
-    const [randomNumber, setRandomNumber] = useState(randNum);
 
     // Form functions
     const handleInputChange = (event) => {
@@ -58,28 +87,45 @@ const Flashcard = () => {
     }
 
     // Getter functions 
-    const getRandomNumber = () => {
-        const randNum = Math.floor(Math.random() * 11);
-        setRandomNumber(randNum);
-    }
     const getQuestion = () => {
-        const randomElement = flashcards[randomNumber];
-        const randomQuestion = Object.keys(randomElement)[0];
-        return randomQuestion;
+        if (isInitialized) {
+            const randomIndex = randomIndexArray[currentIndex];
+            const randomElement = flashcards[randomIndex];
+            const randomQuestion = Object.keys(randomElement)[0];
+            return randomQuestion;
+        }
     }
     const getAnswer = () => {
-        const randomElement = flashcards[randomNumber];
-        const randomAnswer = Object.values(randomElement)[0];
-        return randomAnswer;
+        if (isInitialized) {
+            const randomIndex = randomIndexArray[currentIndex];
+            const randomElement = flashcards[randomIndex];
+            const randomAnswer = Object.values(randomElement)[0];
+            return randomAnswer;
+        }
     }
 
     // OnClick Functions
     const flipCard = () => {
         setIsFront(!isFront);
     }
-    const nextCard = () => {
-        // call the random number generator and switch the state of the card to the front
-        getRandomNumber();
+    const nextCard = () => {   // Step 4: update nextCard logic to increment the current index
+        // Bounds check: make sure index doesn't go past 9
+        if (currentIndex < 9) {
+            setCurrentIndex(currentIndex + 1);
+            setIsFront(true);
+        }
+    }
+    const previousCard = () => {  // Step 5: make previousCard function that decrements the current index and reset the isFront to true
+        // Bounds check: make sure index doesn't go lower than 0
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+            setIsFront(true);
+        }
+    }
+    const shuffleCards = () => {
+        // Call the function to generate a new random index array, reset the current index to 0, make sure front is true
+        generateRandomIndexArray();
+        setCurrentIndex(0);
         setIsFront(true);
     }
 
@@ -93,8 +139,14 @@ const Flashcard = () => {
                     <h4 className='Answer'>{getAnswer()}</h4>
                 )}
             </div>
+            
+            <button onClick={previousCard} className='button-changeCard'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F5F5F5" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
 
-            <button onClick={nextCard} className='button-nextCard'>
+            </button>
+            <button onClick={nextCard} className='button-changeCard'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F5F5F5" className="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
                 </svg>
@@ -112,6 +164,7 @@ const Flashcard = () => {
                     />
                     <button type='submit' className='button-guess'>Submit Guess</button>
                 </form>
+                <button onClick={shuffleCards} className='button-shuffle'>Shuffle</button>
             </div>
         </div>
     )
