@@ -82,7 +82,7 @@ const Flashcard = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         var similarity = jaroSimilarity(getAnswer(), inputValue);
-        setIsCorrect(similarity >= 0.7 ? 'correct' : 'incorrect');
+        setIsCorrect(similarity >= 0.54 ? 'correct' : 'incorrect');
         console.log("similarity: " + similarity);
     }
 
