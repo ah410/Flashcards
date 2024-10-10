@@ -10,7 +10,7 @@
   margin: auto;
   box-sizing: border-box;
   box-shadow: 0 0 5px 2px #0000004d;
-  }
+}
 .Flashcard:hover {
   cursor: pointer;
   box-shadow: 0 0 10px 4px #0000004d; /* Double the box shadow for an enhanced interactive effect */
@@ -31,10 +31,16 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 form * {
   padding: 0.5rem 0.5rem;
-
+}
+.answer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 #correct {
   background-color: green;
@@ -47,15 +53,26 @@ form * {
   color: #F5F5F5;
   border-radius: 5%;
   cursor: pointer;
+  margin: 5px auto;
 }
 .button-shuffle {
   background-color: #333333;
   color: #F5F5F5;
   border-radius: 5%;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  margin: 0 8px;
+  padding: 15px;
 }
 input {
   margin-right: 7px;
   border-radius: 5%;
+}
+
+@media screen and (max-width: 1920px) {
+  .Flashcard {
+    width: 50vw;         
+    height: 40vh;         
+    max-width: 450px;     
+    max-height: 350px;
+  }
 }

@@ -164,7 +164,7 @@ const Flashcard = () => {
                     />
                     <button type='submit' className='button-guess'>Submit Guess</button>
                 </form>
-                <button onClick={shuffleCards} className='button-shuffle'>Shuffle</button>
+                <button onClick={shuffleCards} className='button-shuffle'>Shuffle Cards</button>
             </div>
         </div>
     )
