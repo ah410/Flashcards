@@ -34,7 +34,7 @@ form {
   flex-wrap: wrap;
 }
 form * {
-  padding: 0.5rem 0.5rem;
+  padding: 0.4rem 0.5rem;
 }
 .answer-container {
   display: flex;
@@ -71,8 +71,20 @@ input {
 @media screen and (max-width: 1920px) {
   .Flashcard {
     width: 50vw;         
-    height: 40vh;         
+    height: 30vh;         
     max-width: 450px;     
     max-height: 350px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Flashcard {
+    width: 50vw;         
+    height: 14vh;         
+    max-width: 450px;     
+    max-height: 350px;
+  }
+  .button-changeCard {
+    padding: 10px 20px;
   }
 }
