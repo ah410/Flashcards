@@ -70,9 +70,9 @@ input {
 
 @media screen and (max-width: 1920px) {
   .Flashcard {
-    width: 50vw;         
+    width: 60vw;         
     height: 30vh;         
-    max-width: 450px;     
+    max-width: 650px;     
     max-height: 350px;
   }
 }
@@ -80,7 +80,7 @@ input {
 @media screen and (max-width: 800px) {
   .Flashcard {
     width: 50vw;         
-    height: 14vh;         
+    height: 18vh;         
     max-width: 450px;     
     max-height: 350px;
   }
